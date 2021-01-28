@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+enfile = ARGV.shift
+otherfile = ARGV.shift
+outfile = ARGV.shift or
+  (warn 'Usage: json2xlsx <en-json-filename> <other-json-filename> <output-filename>'; exit 1)
+
+require_relative '../config/application'
+
+terms = Term.read_parse_merge(enfile, otherfile)
+
+File.open(outfile, 'wb') do |f|
+  f.write TermExport.new(terms).to_xlsx.read
+end

@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+xlsxfile = ARGV.shift
+outenfile = ARGV.shift
+outotherfile = ARGV.shift or
+  (warn 'Usage: xlsx2json <xlsx-filename> <output-en-json-filename> <output-other-json-filename>'; exit 1)
+
+require_relative '../config/application'
+
+MAPPING = {
+  'key' => 'Key',
+  'base' => 'Base',
+  'translated' => 'Translated',
+}.freeze
+
+terms = []
+handler = File.extname(xlsxfile) == '.xlsx' ? Roo::Excelx : Roo::Excel
+handler.new(xlsxfile).each(MAPPING) do |row|
+  next if row[MAPPING.keys.first] == MAPPING.values.first # ignore header row if present
+
+  terms << Term.new(row.transform_keys(&:to_sym))
+end
+
+File.open(outenfile, 'w') do |f|
+  f.puts Term.array_to_hierarchical_base_json(terms, pretty: true)
+end
+File.open(outotherfile, 'w') do |f|
+  f.puts Term.array_to_hierarchical_translated_json(terms, pretty: true)
+end

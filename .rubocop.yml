@@ -1,0 +1,140 @@
+# https://docs.rubocop.org/en/latest/cops/
+
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7
+  Exclude:
+    - bin/bundle
+    - db/root_migrations/**/*
+    - db/root_schema.rb
+    - db/schema.rb
+    - db/tenant_migrations/**/*
+    - db/tenant_seeds.rb
+    - node_modules/**/*
+    - spec/fixtures/**/*
+    - vendor/**/*
+    - tmp/**/*
+
+Bundler/OrderedGems:
+  Exclude:
+    - 'Gemfile'
+
+Layout/ExtraSpacing:
+  Exclude:
+    - 'config/boot.rb'
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+  Exclude:
+    - app/models/**/*
+
+Layout/IndentationWidth:
+  Exclude:
+    - app/models/**/*
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - config/initializers/devise.rb
+    - db/*seeds.rb
+    - spec/**/*
+
+Lint/UnreachableLoop:
+  Exclude:
+    - app/models/survey_question_response.rb
+
+Metrics/AbcSize:
+  Max: 26
+  Exclude:
+    - app/controllers/admin/reports_controller.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - Guardfile
+    - config/environments/*
+    - config/initializers/devise.rb
+    - config/routes.rb
+    - lib/tasks/auto_annotate_models.rake
+    - spec/**/*
+
+Metrics/ClassLength:
+  Exclude:
+    - app/controllers/reservation_controller.rb
+    - app/controllers/admin/reports_controller.rb
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - app/controllers/admin/reports_controller.rb
+
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - app/controllers/admin/reports_controller.rb
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - app/controllers/admin/reports_controller.rb
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Exclude:
+    - Guardfile
+
+Style/Semicolon:
+  AllowAsExpressionSeparator: true
+
+Style/SymbolProc:
+  Exclude:
+    - app/models/*_export.rb
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false

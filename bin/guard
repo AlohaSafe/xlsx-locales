@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -o allexport
+. .env
+set +o allexport
+
+bundle exec guard

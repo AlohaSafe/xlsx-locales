@@ -1,0 +1,16 @@
+{
+  "ruby.useBundler": true,
+  "ruby.useLanguageServer": true,
+  "ruby.lint": {
+    "rubocop": {
+      "useBundler": true,
+      "lint": true, // enable lint cops
+      "rails": true // requires rubocop-rails gem for RuboCop >= 0.72.0
+    }
+  },
+  "ruby.format": false,
+  "solargraph.formatting": true,
+  "terminal.integrated.shellArgs.linux": [
+    "-l"
+  ]
+}
