@@ -10,6 +10,9 @@ require_relative '../config/application'
 
 terms = Term.read_parse_merge(enfile, otherfile)
 
+# optional step: remove keys with no base text (i.e. outdated keys no longer present in en.json)
+terms.reject! { |t| t.base.blank? }
+
 File.open(outfile, 'wb') do |f|
   f.write TermExport.new(terms).to_xlsx.read
 end
