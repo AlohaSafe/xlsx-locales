@@ -1,17 +1,25 @@
 # xlsx-locales
 
-For use with [PathCheck's GAEN app](https://github.com/Path-Check/gaen-mobile). Converts JSON locale files to and from XLSX to enable translation workflow.
+Converts [i18next](https://www.i18next.com/) JSON locale files to and from XLSX to enable a simple single language translation workflow.
 
 ## Requirements
 
 * Ruby 2.6+
 
-## Usage
+## Example Usage
 
 ```bash
+# 0. install dependencies
 bundle install
 
-bundle exec bin/json2xlsx <en-json-filename> <other-json-filename> <output-filename>
+# 1. create an xlsx file with 3 columns: key, base string (en), translated string (ko)
+bundle exec bin/json2xlsx en.json ko.json en-ko.xlsx
 
-bundle exec bin/xlsx2json <xlsx-filename> <output-en-json-filename> <output-other-json-filename>
+# 2. translator updates en-ko.xlsx -> en-ko-updated.xlsx
+
+# 3. convert 3rd column back to a json file (also outputs en.json, but typically that can be ignored)
+bundle exec bin/xlsx2json en-ko-updated.xlsx en-updated.json ko-updated.json
+
+# 4. merge updated ko.json back into original
+bundle exec bin/json2json ko.json ko-updated.json ko-final.json
 ```
