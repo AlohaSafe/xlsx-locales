@@ -65,6 +65,7 @@ class Term
     new_hash
   end
 
+  # does not actually have to be base and translated, can merge any two arrays of terms
   def self.merge(en_terms, other_terms)
     hash = en_terms.map { |t| [t.key, t] }.to_h
 
@@ -90,7 +91,7 @@ class Term
   def self.array_to_hierarchical_json(terms, base_or_translated, separator: '.', pretty: true)
     hash = {}
 
-    terms.each do |t|
+    terms.sort_by(&:key).each do |t|
       next unless (val = t.send(base_or_translated))
 
       parts = t.key.split(separator)
